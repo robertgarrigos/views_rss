@@ -77,7 +77,7 @@ function template_preprocess_views_view_views_rss(&$variables) {
       // it will be encoded again when the whole feed array will be passed to
       // format_xml_elements(), let's make sure we decode it here first.
       if (is_string($value)) {
-        $value = htmlspecialchars_decode($value, ENT_QUOTES);
+        $value = decode_entities($value);
       }
 
       // Start building XML channel element array compatible with format_xml_elements().
@@ -153,7 +153,7 @@ function template_preprocess_views_view_views_rss(&$variables) {
         // it will be encoded again when the whole feed array will be passed to
         // format_xml_elements(), let's make sure we decode it here first.
         if (is_string($value)) {
-          $value = htmlspecialchars_decode($value, ENT_QUOTES);
+          $value = decode_entities($value);
         }
 
         // Start building XML element array compatible with format_xml_elements().
