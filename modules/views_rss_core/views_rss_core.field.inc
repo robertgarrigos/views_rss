@@ -55,7 +55,7 @@ function views_rss_core_field_formatter_settings_summary($field, $instance, $vie
     unset($image_styles['']);
     // Styles could be lost because of enabled/disabled modules that defines
     // their styles in code.
-    if (isset($image_styles[$settings['image_style']])) {
+    if (!empty($settings['image_style']) && !empty($image_styles[$settings['image_style']])) {
       $summary[] = t('Image style: @style', array('@style' => $image_styles[$settings['image_style']]));
     }
     else {
@@ -122,7 +122,7 @@ function views_rss_core_field_formatter_view($entity_type, $entity, $field, $ins
     else {
       $uri = file_create_url($item['uri']);
     }
-    
+
     // XML element array in format_xml_elements() format.
     $rss_element = array(
       'key' => 'enclosure',
@@ -138,7 +138,7 @@ function views_rss_core_field_formatter_view($entity_type, $entity, $field, $ins
       '#markup' => format_xml_elements(array($rss_element)),
       '#rss_element' => $rss_element,
     );
-        
+
   }
   return $element;
 }
