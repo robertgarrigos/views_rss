@@ -101,9 +101,8 @@ function views_rss_core_field_formatter_view($entity_type, $entity, $field, $ins
       // Get file size of image preset file (if it has already been created,
       // otherwise just create it first and then get file size).
       $path = image_style_path($display['settings']['image_style'], $item['uri']);
-      $real_path = drupal_realpath($path);
-      if (file_exists($real_path) || image_style_create_derivative($image_style, $item['uri'], $path)) {
-        $item['filesize'] = filesize($real_path);
+      if (file_exists($path) || image_style_create_derivative($image_style, $item['uri'], $path)) {
+        $item['filesize'] = filesize($path);
       }
     }
     elseif ($field['type'] == 'media') {
