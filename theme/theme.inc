@@ -216,6 +216,20 @@ function template_preprocess_views_view_views_rss(&$variables) {
 
         // Add XML element(s) to the item array.
         $rss_item['value'] = array_merge($rss_item['value'], $rss_elements);
+
+        // CDATA support. This is a little complicated due to how
+        // format_xml_elements() works. In order to have the CDATA part output
+        // correctly the "encoded" attribute must be set. Then, to make sure
+        // the data is safe, the value needs to be wrapped in check_plain().
+        // @see format_xml_elements()
+        foreach ($rss_item['value'] as $item => &$item_value) {
+          if (!empty($item_elements[$module][$element]['cdata'])) {
+            if (!empty($item_value['value'])) {
+              $item_value['encoded'] = TRUE;
+              $item_value['value'] = '<![CDATA[' . check_plain($item_value['value']) . ']]>';
+            }
+          }
+        }
       }
     }
 
