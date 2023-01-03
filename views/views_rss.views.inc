@@ -14,7 +14,7 @@ function views_rss_views_plugins() {
     'style' => array(
       'rss_fields' => array(
         'type' => 'feed',
-        'title' => t('RSS Feed - Fields'),
+        'title' => t('Advanced RSS feed'),
         'help' => t('Outputs a RSS formatted feed'),
         'handler' => 'views_rss_plugin_style_fields',
         'path' => VIEWS_RSS_PATH . '/views',

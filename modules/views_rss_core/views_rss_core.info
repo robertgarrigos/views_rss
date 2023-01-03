@@ -1,4 +1,4 @@
-name = "Views RSS: Core Elements"
+name = "Advanced Views RSS Feed: Core Elements"
 description = "Provides core XML channel and item elements for Views RSS."
 package = Views
 dependencies[] = views_rss
