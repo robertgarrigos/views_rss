@@ -2,4 +2,5 @@ name = "Advanced Views RSS Feed: DC Elements"
 description = "Provides Dublin Core Metadata element set for Views RSS"
 package = Views
 dependencies[] = views_rss
-core = "7.x"
+backdrop = 1.x
+type = module

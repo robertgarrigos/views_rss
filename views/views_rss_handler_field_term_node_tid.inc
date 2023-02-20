@@ -88,7 +88,7 @@ class views_rss_handler_field_term_node_tid extends views_handler_field_term_nod
             $this->items[$node_nid][$term_tid]['path'] = 'taxonomy/term/' . $term_tid;
           }
           if ($this->options['rss_include_parents']) {
-            $this->items[$node_nid][$term_tid]['parents'] = taxonomy_get_parents_all($term_tid);
+            $this->items[$node_nid][$term_tid]['parents'] = taxonomy_term_load_parents_all($term_tid);
           }
           if ($this->options['rss_include_vocabulary']) {
             $this->items[$node_nid][$term_tid]['vocabulary'] = $term['vocabulary'];

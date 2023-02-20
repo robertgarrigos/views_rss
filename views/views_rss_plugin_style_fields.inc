@@ -24,7 +24,7 @@ class views_rss_plugin_style_fields extends views_plugin_style {
     $url = url($feed_path, $url_options);
     if ($display->has_path() && !$this->options['feed_settings']['feed_in_links']) {
       if (empty($this->preview)) {
-        drupal_add_feed($url, $title);
+        backdrop_add_feed($url, $title);
       }
     }
     else {
@@ -33,7 +33,7 @@ class views_rss_plugin_style_fields extends views_plugin_style {
       }
 
       $this->view->feed_icon .= theme('feed_icon', array('url' => $url, 'title' => $title));
-      drupal_add_html_head_link(array(
+      backdrop_add_html_head_link(array(
         'rel' => 'alternate',
         'type' => 'application/rss+xml',
         'title' => $title,
@@ -94,7 +94,7 @@ class views_rss_plugin_style_fields extends views_plugin_style {
 
     $handlers = $this->display->handler->get_handlers('field');
     if (empty($handlers)) {
-      drupal_set_message(t('You need at least one field before you can configure your field settings.'), 'error');
+      backdrop_set_message(t('You need at least one field before you can configure your field settings.'), 'error');
     }
     else {
 
@@ -384,7 +384,7 @@ class views_rss_plugin_style_fields extends views_plugin_style {
           // taking place in template_preprocess_views_view_views_rss().
           if (
             isset($this->options['item'][$namespace][$module][$element_name])
-            && isset($row[$this->options['item'][$namespace][$module][$element_name]])
+             && isset($row[$this->options['item'][$namespace][$module][$element_name]])
           ) {
             $item[$module][$element] = $row[$this->options['item'][$namespace][$module][$element_name]];
           }
@@ -394,7 +394,7 @@ class views_rss_plugin_style_fields extends views_plugin_style {
           // Keep raw values too.
           if (
             !empty($this->options['item'][$namespace][$module][$element_name])
-            && !empty($raw[$id][$this->options['item'][$namespace][$module][$element_name]])
+             && !empty($raw[$id][$this->options['item'][$namespace][$module][$element_name]])
           ) {
             $raw_item[$module][$element] = $raw[$id][$this->options['item'][$namespace][$module][$element_name]];
           }

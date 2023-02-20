@@ -13,7 +13,7 @@ define('VIEWS_RSS_BUILD', '7.x-2.x-dev-20120416');
 /**
  * Module installation path.
  */
-define('VIEWS_RSS_PATH', drupal_get_path('module', 'views_rss'));
+define('VIEWS_RSS_PATH', backdrop_get_path('module', 'views_rss'));
 
 /**
  * In theory, theme.inc should be automatically loaded from hook_views_plugins()
@@ -67,7 +67,7 @@ function views_rss_get($key, $rebuild = FALSE) {
         $data[$key] = $function($data[$key]);
       }
       // Allow other modules to alter obtained item elements.
-      drupal_alter($hook_name, $data[$key]);
+      backdrop_alter($hook_name, $data[$key]);
       // Store it infinitely in cache (rebuild only on cache clear).
       cache_set($cid, $data[$key], 'cache_views');
     }
@@ -85,7 +85,10 @@ function _views_rss_process_namespaces($namespaces) {
     foreach (array_keys($elements) as $element) {
       list($namespace, $element_name) = views_rss_extract_element_names($element);
       if ($namespace && !isset($namespaces[$module][$namespace])) {
-        $namespaces[$module][$namespace] = array('prefix' => 'xmlns', 'uri' => NULL);
+        $namespaces[$module][$namespace] = array(
+          'prefix' => 'xmlns',
+          'uri' => NULL,
+        );
       }
     }
   }
@@ -93,7 +96,10 @@ function _views_rss_process_namespaces($namespaces) {
     foreach (array_keys($elements) as $element) {
       list($namespace, $element_name) = views_rss_extract_element_names($element);
       if ($namespace && !isset($namespaces[$module][$namespace])) {
-        $namespaces[$module][$namespace] = array('prefix' => 'xmlns', 'uri' => NULL);
+        $namespaces[$module][$namespace] = array(
+          'prefix' => 'xmlns',
+          'uri' => NULL,
+        );
       }
     }
   }
@@ -139,7 +145,7 @@ function views_rss_rewrite_relative_paths(&$variables) {
   // so rewrite relative paths even if option value is not set.
   if (
     !isset($variables['view']->style_plugin->options['feed_settings']['absolute_paths'])
-    || !empty($variables['view']->style_plugin->options['feed_settings']['absolute_paths'])
+      || !empty($variables['view']->style_plugin->options['feed_settings']['absolute_paths'])
   ) {
     global $base_path;
     foreach ($variables['elements'] as $delta => $element) {
@@ -165,7 +171,18 @@ function views_rss_rewrite_relative_paths(&$variables) {
  */
 function views_rss_map_assoc($array) {
   if (!(array_keys($array) !== range(0, count($array) - 1))) {
-    $array = drupal_map_assoc($array);
+    $array = backdrop_map_assoc($array);
   }
   return $array;
+}
+
+/**
+ * Implements hook_autoload_info().
+ */
+function views_rss_autoload_info() {
+  return array(
+    'views_rss_handler_field_term_node_tid' => 'views/views_rss_handler_field_term_node_tid.inc',
+    'views_rss_handler_field_user_mail' => 'views/views_rss_handler_field_user_mail.inc',
+    'views_rss_plugin_style_fields' => 'views/views_rss_plugin_style_fields.inc',
+  );
 }

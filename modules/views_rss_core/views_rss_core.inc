@@ -10,7 +10,7 @@
  */
 function views_rss_core_preprocess_channel_title(&$variables) {
   $view_title = $variables['view']->get_title();
-  $variables['elements'][0]['value'] = ($view_title) ? $view_title : variable_get('site_name', t('Drupal'));
+  $variables['elements'][0]['value'] = ($view_title) ? $view_title : config_get('system.performance', 'site_name');
 }
 
 /**
@@ -18,7 +18,7 @@ function views_rss_core_preprocess_channel_title(&$variables) {
  */
 function views_rss_core_preprocess_channel_description(&$variables) {
   if (empty($variables['elements'][0]['value'])) {
-    $variables['elements'][0]['value'] = variable_get('site_slogan', '');
+    $variables['elements'][0]['value'] = config_get('system.performance', 'site_slogan');
   }
 }
 
@@ -96,7 +96,7 @@ function views_rss_core_preprocess_channel_image(&$variables) {
     'link' => $link,
   );
   // Try to get image description from website's mission.
-  $site_slogan = variable_get('site_slogan', '');
+  $site_slogan = config_get('system.performance', 'site_slogan');
   if (!empty($site_slogan)) {
     $variables['elements'][0]['value']['description'] = $site_slogan;
   }
@@ -183,7 +183,7 @@ function views_rss_core_preprocess_item_guid(&$variables) {
   $is_permalink = 'false';
   if (
     (!isset($variables['item']['views_rss_core']['link']) || empty($variables['item']['views_rss_core']['link']))
-    && valid_url($variables['elements'][0]['value'], TRUE)
+     && valid_url($variables['elements'][0]['value'], TRUE)
   ) {
     $is_permalink = 'true';
   }
@@ -202,6 +202,6 @@ function views_rss_core_preprocess_item_source(&$variables) {
   $url = url($variables['view']->get_url(), $url_options);
 
   $view_title = $variables['view']->get_title();
-  $variables['elements'][0]['value'] = (!empty($view_title)) ? $view_title : variable_get('site_name', t('Drupal'));
+  $variables['elements'][0]['value'] = (!empty($view_title)) ? $view_title : config_get('system.performance', 'site_name');
   $variables['elements'][0]['attributes'] = array('url' => $url);
 }

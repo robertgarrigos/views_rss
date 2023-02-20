@@ -88,9 +88,9 @@ function views_rss_core_field_formatter_view($entity_type, $entity, $field, $ins
     // Inside a view item may contain NULL data. In that case, just return.
     if (
       ($field['type'] == 'file' || $field['type'] == 'image') && empty($item['fid'])
-      || $field['type'] == 'media' && empty($item['file']->fid)
-      || $field['type'] == 'text' && empty($item['safe_value'])
-      || $field['type'] == 'link_field' && empty($item['url'])
+       || $field['type'] == 'media' && empty($item['file']->fid)
+       || $field['type'] == 'text' && empty($item['safe_value'])
+       || $field['type'] == 'link_field' && empty($item['url'])
     ) {
       unset($items[$delta]);
       continue;
@@ -128,7 +128,7 @@ function views_rss_core_field_formatter_view($entity_type, $entity, $field, $ins
       'attributes' => array(
         'url' => $uri,
         'length' => $item['filesize'],
-        'type'   => $item['filemime'],
+        'type' => $item['filemime'],
       ),
     );
 

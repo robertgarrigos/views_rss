@@ -8,12 +8,12 @@
 /**
  * Module installation path.
  */
-define('VIEWS_RSS_CORE_PATH', drupal_get_path('module', 'views_rss_core'));
+define('VIEWS_RSS_CORE_PATH', backdrop_get_path('module', 'views_rss_core'));
 
 /**
  * Include file with field formatters.
  */
-include_once VIEWS_RSS_CORE_PATH .'/views_rss_core.field.inc';
+include_once VIEWS_RSS_CORE_PATH . '/views_rss_core.field.inc';
 
 /**
  * Include file with all preprocess functions.
@@ -21,7 +21,7 @@ include_once VIEWS_RSS_CORE_PATH .'/views_rss_core.field.inc';
 include_once VIEWS_RSS_CORE_PATH . '/views_rss_core.inc';
 
 /**
- * Implementation of hook_views_rss_namespaces().
+ * Implements hook_views_rss_namespaces().
  */
 function views_rss_core_views_rss_namespaces() {
   $namespaces['atom'] = array(
@@ -46,7 +46,10 @@ function views_rss_core_views_rss_channel_elements() {
   );
   $elements['description'] = array(
     'description' => t('Description for this feed. If left blank, the default site mission will be used.'),
-    'settings form' => array('#type' => 'textarea', '#rows' => 3),
+    'settings form' => array(
+      '#type' => 'textarea',
+      '#rows' => 3,
+    ),
     'preprocess functions' => array(
       'views_rss_core_preprocess_channel_description',
       'views_rss_rewrite_relative_paths',

@@ -33,7 +33,7 @@ function template_preprocess_views_view_views_rss(&$variables) {
       // should be overwritten by module configuration.
       if (
         isset($view->style_plugin->options['namespaces'][$module][$namespace])
-        && !empty($view->style_plugin->options['namespaces'][$module][$namespace])
+         && !empty($view->style_plugin->options['namespaces'][$module][$namespace])
       ) {
         $definition['uri'] = $view->style_plugin->options['namespaces'][$module][$namespace];
       }
@@ -110,7 +110,9 @@ function template_preprocess_views_view_views_rss(&$variables) {
           unset($rss_elements[$key]);
         }
       }
-      if (empty($rss_elements)) continue;
+      if (empty($rss_elements)) {
+        continue;
+      }
 
       // Add XML element(s) to the channel array.
       $rss_channel = array_merge($rss_channel, $rss_elements);
@@ -186,7 +188,7 @@ function template_preprocess_views_view_views_rss(&$variables) {
         // be added to the feed array without any further modifications.
         elseif (
           !empty($view->views_rss['raw_items'][$item_key][$module][$element])
-          && is_array($view->views_rss['raw_items'][$item_key][$module][$element])
+           && is_array($view->views_rss['raw_items'][$item_key][$module][$element])
         ) {
           // At this point we don't know yet if we got #rss_elements in raw
           // values, so do not overwrite and empty main $rss_elements yet, just
@@ -212,7 +214,9 @@ function template_preprocess_views_view_views_rss(&$variables) {
             unset($rss_elements[$key]);
           }
         }
-        if (empty($rss_elements)) continue;
+        if (empty($rss_elements)) {
+          continue;
+        }
 
         // Add XML element(s) to the item array.
         $rss_item['value'] = array_merge($rss_item['value'], $rss_elements);
@@ -244,11 +248,11 @@ function template_preprocess_views_view_views_rss(&$variables) {
   );
 
   // Allow for altering it before final render and passing it to the template.
-  drupal_alter('views_rss_feed', $rss_feed);
+  backdrop_alter('views_rss_feed', $rss_feed);
 
   // Assign rendered feed to the template variables.
   $variables['rss_feed'] = format_xml_elements(array($rss_feed));
 
   // Set XML header.
-  drupal_add_http_header('Content-Type', 'application/rss+xml; charset=utf-8');
+  backdrop_add_http_header('Content-Type', 'application/rss+xml; charset=utf-8');
 }
