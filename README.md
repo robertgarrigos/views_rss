@@ -10,6 +10,10 @@ Installation
 - Install this module using the official Backdrop CMS instructions at
   https://docs.backdropcms.org/documentation/extend-with-modules.
 
+
+Setup
+-----
+
 - Enable Advanced Views RSS Feed and Advanced Views RSS Feed: Core Elements.
 - Enable Advanced Views RSS Feed: DC Elements if you are using Dublin Core Metadata.
 - Create a new View, or customize an existing one.
@@ -33,8 +37,9 @@ Current Maintainers
 Credits 
 -------
 
-- Ported to Backdrop CMS by [Paula Gray-Overtoom](https://github.com/pgrayove-mcpl).
-- Originally written for Drupal by [Robert Soden](https://github.com/rsoden).
+- Ported to Backdrop CMS by [Paula Gray-Overtoom](https://github.com/pgrayove-mcpl) for [Monroe County Public Library](https://mcpl.info).
+- Originally written for Drupal by [rsoden](https://www.drupal.org/user/226437).
+- Drupal project supported by [Mediacurrent](https://www.drupal.org/mediacurrent).
 
 
 License 
