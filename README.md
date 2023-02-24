@@ -1,4 +1,4 @@
-Advvanced Views RSS Feed
+Advanced Views RSS Feed
 ======================
 
 Views RSS allows sites to take control of their RSS feeds by providing Views plugins for customizing individual fields.
