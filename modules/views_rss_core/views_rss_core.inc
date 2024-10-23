@@ -10,7 +10,7 @@
  */
 function views_rss_core_preprocess_channel_title(&$variables) {
   $view_title = $variables['view']->get_title();
-  $variables['elements'][0]['value'] = ($view_title) ? $view_title : config_get('', 'site_name');
+  $variables['elements'][0]['value'] = ($view_title) ? $view_title : config_get('system.core', 'site_name');
 }
 
 /**
@@ -18,7 +18,7 @@ function views_rss_core_preprocess_channel_title(&$variables) {
  */
 function views_rss_core_preprocess_channel_description(&$variables) {
   if (empty($variables['elements'][0]['value'])) {
-    $variables['elements'][0]['value'] = config_get('', 'site_slogan');
+    $variables['elements'][0]['value'] = config_get('system.core', 'site_slogan');
   }
 }
 
@@ -96,7 +96,7 @@ function views_rss_core_preprocess_channel_image(&$variables) {
     'link' => $link,
   );
   // Try to get image description from website's mission.
-  $site_slogan = config_get('', 'site_slogan');
+  $site_slogan = config_get('system.core', 'site_slogan');
   if (!empty($site_slogan)) {
     $variables['elements'][0]['value']['description'] = $site_slogan;
   }
@@ -202,6 +202,6 @@ function views_rss_core_preprocess_item_source(&$variables) {
   $url = url($variables['view']->get_url(), $url_options);
 
   $view_title = $variables['view']->get_title();
-  $variables['elements'][0]['value'] = (!empty($view_title)) ? $view_title : config_get('', 'site_name');
+  $variables['elements'][0]['value'] = (!empty($view_title)) ? $view_title : config_get('system.core', 'site_name');
   $variables['elements'][0]['attributes'] = array('url' => $url);
 }
